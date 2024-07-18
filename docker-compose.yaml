@@ -1,0 +1,13 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: wab12345678
+      MYSQL_DATABASE: cliente-real
+      MYSQL_USER: username
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./data:/var/lib/mysql
+    ports:
+      - 3306:3306
