@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nova Propriedade do Produto{% endblock %}
+
+{% block body %}
+    <h1>Create new ProductProperty</h1>
+
+    {{ include('admin/product_property/_form.html.twig') }}
+
+    <a class="btn btn-secondary ms-3 mt-3 float-start" href="{{ path('app_admin_product_property_index') }}">Voltar</a>
+{% endblock %}
