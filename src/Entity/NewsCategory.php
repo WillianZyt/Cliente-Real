@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductPropertyRepository;
+use App\Repository\NewsCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ProductPropertyRepository::class)]
-class ProductProperty
+#[ORM\Entity(repositoryClass: NewsCategoryRepository::class)]
+class NewsCategory
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
