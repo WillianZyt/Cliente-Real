@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% set languagesEnum = enum('App\\Entity\\Enum\\LanguageEnum') %}
+
 {% block title %}Lista de Propriedades dos Produtos
 {% endblock %}
 
@@ -45,6 +47,7 @@ $('#tabela').DataTable({
 				<thead>
 					<tr>
 						<th>Título</th>
+						<th>Idioma</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -52,6 +55,9 @@ $('#tabela').DataTable({
 					{% for product_property in product_properties %}
 						<tr>
 							<td>{{ product_property.title }}</td>
+							<td>
+								{{ languagesEnum.getFlag(product_property.language)|raw }}
+							</td>
 							<td>
 								<a class="btn btn-primary float-end" href="{{ path('app_admin_product_property_edit', {'id': product_property.id}) }}">editar</a>
 							</td>
