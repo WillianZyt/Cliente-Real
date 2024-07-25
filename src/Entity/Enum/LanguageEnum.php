@@ -32,9 +32,15 @@ enum LanguageEnum: int
     public static function getFlag($id): string
     {
         $n = [
-            self::PORTUGUESE->value => '<img src="/assets/images/flags/Flag_of_Brazil.svg" width="20" height="20">',
-            self::SPANISH->value => '<img src="/assets/images/flags/Flag_of_Spain.svg" width="20" height="20">',
-            self::ENGLISH->value => '<img src="/assets/images/flags/Flag_of_the_United_Kingdom.svg" width="20" height="20">',
+            self::PORTUGUESE->value =>  
+            '<div class="d-none">pt</div> 
+            <img src="/assets/images/flags/Flag_of_Brazil.svg" width="20" height="20"> Português',
+            self::SPANISH->value =>     
+            '<div class="d-none">sp</div> 
+            <img src="/assets/images/flags/Flag_of_Spain.svg" width="20" height="20"> Espanhol',
+            self::ENGLISH->value =>     
+            '<div class="d-none">en</div> 
+            <img src="/assets/images/flags/Flag_of_the_United_Kingdom.svg" width="20" height="20"> Inglês',
             "" => '',
         ];
 
