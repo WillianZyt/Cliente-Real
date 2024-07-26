@@ -6,7 +6,10 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script 
+	src="https://code.jquery.com/jquery-3.7.1.min.js" 
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+	crossorigin="anonymous"></script>
 	<script>
 		$(document).ready(function () {
 $('#tabela').DataTable({
@@ -64,7 +67,8 @@ $('#tabela').DataTable({
 						</tr>
 					{% else %}
 						<tr>
-							<td colspan="3">Sem registros</td>
+							<td colspan="3">Sem registros
+							</td>
 						</tr>
 					{% endfor %}
 				</tbody>
