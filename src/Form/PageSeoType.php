@@ -28,9 +28,6 @@ class PageSeoType extends AbstractType
             ->add('financingListPageDescription')
             ->add('videoListingPageTitle')
             ->add('videoListingPageDescription')
-            ->add('language',ChoiceType::class, [
-                'choices' => LanguageEnum::getOptions(),
-            ])
         ;
     }
 
