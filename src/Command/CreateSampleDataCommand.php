@@ -4,8 +4,10 @@ namespace App\Command;
 
 use App\Entity\Enum\LanguageEnum;
 use App\Entity\GeneralData;
+use App\Entity\GlobalTags;
 use App\Entity\PageSeo;
 use App\Repository\GeneralDataRepository;
+use App\Repository\GlobalTagsRepository;
 use App\Repository\PageSeoRepository;
 use Doctrine\Inflector\Language;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,6 +28,7 @@ class CreateSampleDataCommand extends Command
     public function __construct(
         private GeneralDataRepository $generalDataRepository,
         private PageSeoRepository $pageSeoRepository,
+        private GlobalTagsRepository $globalTagsRepository,
         private EntityManagerInterface $em
     ) {
         parent::__construct();
@@ -41,9 +44,9 @@ class CreateSampleDataCommand extends Command
         foreach (LanguageEnum::getOptions() as $index => $option) {
             $pageSeo = $this->pageSeoRepository->findOneBy(['language' => $option]);
             if ($pageSeo) {
-                $io->writeln('Page Seo em '.$option.'<comment> já existe!</comment>');
+                $io->writeln('Page Seo em '.$index.'<comment> já existe!</comment>');
             } else {
-                $io->writeln('Page Seo em '.$option.'<comment> criada!</comment>');
+                $io->writeln('Page Seo em '.$index.'<comment> criada!</comment>');
                 $pageSeo = new PageSeo();
                 # homePageTitle
                 $pageSeo->setHomePageTitle('Título da Home');
@@ -85,6 +88,20 @@ class CreateSampleDataCommand extends Command
 
             $this->em->persist($generalData);
             $this->em->flush($generalData);
+        }
+
+        $globalTags = $this->globalTagsRepository->findAll();
+        if ($globalTags) {
+            $io->writeln('Global Tags <comment> já existe!</comment>');
+        } else {
+            $io->writeln('Global Tags <comment> criada!</comment>');
+            $globalTags = new GlobalTags();
+            $globalTags->setGa4('Ga4');
+            $globalTags->setTagsGoogleAds('Google ads');
+            $globalTags->setPixelMetaAds('Meta pixel');
+
+            $this->em->persist($globalTags);
+            $this->em->flush($globalTags);
         }
 
         $io->success('Dados injetados com sucesso!');
