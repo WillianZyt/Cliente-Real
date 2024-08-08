@@ -65,13 +65,20 @@ $('#tabela').DataTable({
 						<th>Posição</th>
 						<th>Imagem</th>
 						<th>Título</th>
-                        <th>Ações</th>
+						<th class="acoes">Ações</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for banner in banners %}
 						<tr>
-							<td>{{ banner.active }}</td> {# STATUS #}
+							<td>
+							{% if banner.active == 1 %}
+								<span class="badge badge-sm bg-success ms-auto">Ativo</span>
+							{% else %}
+								<span class="badge badge-sm bg-danger ms-auto">Inativo</span>
+							{% endif %}
+
+							</td>
 							<td>{{ banner.position }}</td>
 							<td>{{ banner.image }}</td>
 							<td>{{ banner.title }}</td>
@@ -83,12 +90,18 @@ $('#tabela').DataTable({
 						</tr>
 					{% else %}
 						<tr>
-							<td colspan="3">Sem registros</td>
+							<td colspan="5">Sem registros</td>
 						</tr>
 					{% endfor %}
 				</tbody>
 			</table>
 		</div>
 	</div>
+	<style>
+		/* CSS para ocultar a coluna "Ações" */
+		.acoes {
+			display: none;
+		}
+	</style>
 
 {% endblock %}
