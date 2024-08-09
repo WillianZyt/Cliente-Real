@@ -15,4 +15,9 @@ vich_uploader:
                 upload_destination: '%kernel.project_dir%/public/images/bannerImage'
                 namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
                 inject_on_load: true
-    
+
+        whoWeAreImage:
+                uri_prefix: /images/whoWeAreImage
+                upload_destination: '%kernel.project_dir%/public/images/bannerImage'
+                namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+                inject_on_load: true
