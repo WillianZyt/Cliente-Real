@@ -8,11 +8,13 @@ use App\Entity\Enum\LanguageEnum;
 use App\Entity\GeneralData;
 use App\Entity\GlobalTags;
 use App\Entity\PageSeo;
+use App\Entity\WhoWeArePage;
 use App\Repository\ContactFormRepository;
 use App\Repository\ContactFormUrlPostRepository;
 use App\Repository\GeneralDataRepository;
 use App\Repository\GlobalTagsRepository;
 use App\Repository\PageSeoRepository;
+use App\Repository\WhoWeArePageRepository;
 use Doctrine\Inflector\Language;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -33,6 +35,7 @@ class CreateSampleDataCommand extends Command
         private GeneralDataRepository $generalDataRepository,
         private PageSeoRepository $pageSeoRepository,
         private GlobalTagsRepository $globalTagsRepository,
+        private WhoWeArePageRepository $WhoWeArePageRepository,
         private ContactFormUrlPostRepository $contactFormUrlPostRepository,
         private EntityManagerInterface $em
     ) {
@@ -53,31 +56,42 @@ class CreateSampleDataCommand extends Command
             } else {
                 $io->writeln('Page Seo em '.$index.'<comment> criada!</comment>');
                 $pageSeo = new PageSeo();
-                # homePageTitle
                 $pageSeo->setHomePageTitle('Título da Home');
                 $pageSeo->setHomePageDescription('Descrição da Home');
-                ##aboutUsPageTitle
                 $pageSeo->setAboutUsPageTitle('Título da Sobre Nós');
                 $pageSeo->setAboutUsPageDescription('Descrição da Sobre Nós');
-                ##productListingPageTitle
                 $pageSeo->setProductListingPageTitle('Título da Lista de Notícias');
                 $pageSeo->setProductListingPageDescription('Descrição da Lista de Notícias');
-                ##newsListingPageTitle
                 $pageSeo->setNewsListingPageTitle('Título da Lista de Notícias');
                 $pageSeo->setNewsListingPageDescription('Descrição da Lista de Notícias');
-                # serviceListingPageTitle
                 $pageSeo->setServiceListingPageTitle('Título da Lista de Serviços');
                 $pageSeo->setServiceListingPageDescription('Descrição da Lista de Serviços');
-                # financingListPageTitle
                 $pageSeo->setFinancingListPageTitle('Título da Lista de Financiamentos');
                 $pageSeo->setFinancingListPageDescription('Descrição da Lista de Financiamentos');
-                # videoListingPageTitle
                 $pageSeo->setVideoListingPageTitle('Título da Lista de Vídeos');
                 $pageSeo->setVideoListingPageDescription('Descrição da Lista de Vídeos');
                 $pageSeo->setLanguage($option);
-
+                
                 $this->em->persist($pageSeo);
                 $this->em->flush($pageSeo);
+            }
+        }
+        
+        foreach (LanguageEnum::getOptions() as $index => $option) {
+            $whoWeArePage = $this->WhoWeArePageRepository->findOneBy(['language' => $option]);
+            if ($whoWeArePage) {
+                $io->writeln('Quem somos '.$index.'<comment> já existe!</comment>');
+            } else {
+                $io->writeln('Quem somos em '.$index.'<comment> criada!</comment>');
+
+                $whoWeArePage = new WhoWeArePage();
+                $whoWeArePage->setPresentationPart1('Parte 1 da apresentação');
+                $whoWeArePage->setPresentationPart2('Parte 2 da apresentação');
+                $whoWeArePage->setPresentationPart3('Parte 3 da apresentação');
+                $whoWeArePage->setLanguage($option);
+
+                $this->em->persist($whoWeArePage);
+                $this->em->flush($whoWeArePage);
             }
         }
 
