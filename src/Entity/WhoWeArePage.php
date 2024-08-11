@@ -29,14 +29,39 @@ class WhoWeArePage
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $youtubeVideoCode = null;
 
+    #Campo com o nome da imagem
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image1 = null;
 
-    #[Vich\UploadableField(mapping: 'bannerImage', fileNameProperty: 'image1')]
+    #Campo com o arquivo da imagem
+    #[Vich\UploadableField(
+        mapping: 'whoWeAreImage', #Nome do mapeamento que está no arquivo config/packages/vich_uploader.yaml
+        fileNameProperty: 'image1')] #Nome da propriedade que vai receber o nome da imagem
     private ?File $imageFile1 = null;
 
+    #Campo com a data da última atualização da imagem
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $imgUpdatedAt1 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image2 = null;
+
+    #[Vich\UploadableField(
+        mapping: 'whoWeAreImage',
+        fileNameProperty: 'image2')] 
+    private ?File $imageFile2 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $imgUpdatedAt2 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image3 = null;
+
+    #[Vich\UploadableField(mapping: 'whoWeAreImage', fileNameProperty: 'image3')]
+    private ?File $imageFile3 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $imgUpdatedAt3 = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $language = null;
@@ -140,6 +165,78 @@ class WhoWeArePage
     public function setImgUpdatedAt1(?\DateTimeImmutable $imgUpdatedAt1): void
     {
         $this->imgUpdatedAt1 = $imgUpdatedAt1;
+    }
+
+    public function getImage2(): ?string
+    {
+        return $this->image2;
+    }
+
+    public function setImage2(?string $image2): static
+    {
+        $this->image2 = $image2;
+
+        return $this;
+    }
+
+    public function getImageFile2(): ?File
+    {
+        return $this->imageFile2;
+    }
+
+    public function setImageFile2(?File $imageFile2): void
+    {
+        $this->imageFile2 = $imageFile2;
+
+        if (null !== $imageFile2) {
+            $this->imgUpdatedAt2 = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImgUpdatedAt2(): ?\DateTimeImmutable
+    {
+        return $this->imgUpdatedAt2;
+    }
+
+    public function setImgUpdatedAt2(?\DateTimeImmutable $imgUpdatedAt2): void
+    {
+        $this->imgUpdatedAt2 = $imgUpdatedAt2;
+    }
+
+    public function getImage3(): ?string
+    {
+        return $this->image3;
+    }
+
+    public function setImage3(?string $image3): static
+    {
+        $this->image3 = $image3;
+
+        return $this;
+    }
+
+    public function getImageFile3(): ?File
+    {
+        return $this->imageFile3;
+    }
+
+    public function setImageFile3(?File $imageFile3): void
+    {
+        $this->imageFile3 = $imageFile3;
+
+        if (null !== $imageFile3) {
+            $this->imgUpdatedAt3 = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImgUpdatedAt3(): ?\DateTimeImmutable
+    {
+        return $this->imgUpdatedAt3;
+    }
+
+    public function setImgUpdatedAt3(?\DateTimeImmutable $imgUpdatedAt3): void
+    {
+        $this->imgUpdatedAt3 = $imgUpdatedAt3;
     }
 
 }

@@ -19,7 +19,20 @@ class WhoWeArePageType extends AbstractType
             ->add('presentationPart2')
             ->add('presentationPart3')
             ->add('youtubeVideoCode')
+            #Adiciona o campo para upload de arquivo e renderiza o campo de upload de arquivo na página
             ->add('imageFile1', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => false,
+                'asset_helper' => false,
+                'download_uri' => false,
+            ])
+            ->add('imageFile2', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => false,
+                'asset_helper' => false,
+                'download_uri' => false,
+            ])
+            ->add('imageFile3', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => false,
                 'asset_helper' => false,
