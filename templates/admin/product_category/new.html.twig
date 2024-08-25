@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nova Categoria de Produto
+{% endblock %}
+
+{% block body %}
+    <h1>Nova Categoria de Produto</h1>
+
+    {{ include('admin/product_category/_form.html.twig') }}
+
+    <a class="btn btn-secondary ms-3 mt-3 float-start" href="{{ path('app_admin_product_category_index') }}">voltar</a>
+{% endblock %}

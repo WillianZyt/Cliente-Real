@@ -3,7 +3,7 @@
 {% set languagesEnum = enum('App\\Entity\\Enum\\LanguageEnum') %}
 
 {% block title %}
-  Lista de Linhas do Tempo
+  Lista de Categorias de Produtos
 {% endblock %}
 
 {% block javascripts %}
@@ -40,50 +40,39 @@
 
   <div class="row text-end">
     <div class="col">
-      <a class="mb-3 btn btn-success text-white" href="{{ path('app_admin_time_line_new') }}">Novo</a>
+      <a class="mb-3 btn btn-success text-white" href="{{ path('app_admin_product_category_new') }}">Novo</a>
     </div>
   </div>
 
   <div class="card">
-    <h5 class="card-header">Lista de Linhas do Tempo</h5>
+    <h5 class="card-header">Lista de Categorias de Produtos</h5>
     <div class="card-body">
       <table class="table" id="tabela">
         <thead>
           <tr>
-            <th>Status</th>
-            <th>Posição</th>
-            <th>Título</th>
-            <th>Data</th>
-            <th>Idioma</th>
-            <th class="acoes">Ações</th>
+              <th>Título</th>
+              <th>Imagem</th>
+              <th>Idioma</th>
+              <th class="acoes">Ações</th>
           </tr>
         </thead>
         <tbody>
-          {% for time_line in time_lines %}
+        {% for product_category in product_categories %}
             <tr>
+              <td>{{ product_category.title }}</td>
               <td>
-                {% if time_line.status == 1 %}
-                  <span class="badge badge-sm bg-success ms-auto">Ativo</span>
-                {% else %}
-                  <span class="badge badge-sm bg-danger ms-auto">Inativo</span>
+                {% if product_category.imageFile is not empty %}
+                  <img src="{{ vich_uploader_asset(product_category, 'imageFile') }}" width="75" />
                 {% endif %}
               </td>
-              <td>{{ time_line.position }}</td>
-              <td>{{ time_line.title }}</td>
-              <td>{{ time_line.date|date('d/m/Y') }}</td>
-              <td>{{ languagesEnum.getFlag(time_line.language)|raw }}</td>
+              <td>{{ languagesEnum.getFlag(product_category.language)|raw }}</td>
               <td>
-                <a class="btn btn-primary float-end" href="{{ path('app_admin_time_line_edit', { id: time_line.id }) }}">editar</a>
+                <a class="btn btn-primary float-end" href="{{ path('app_admin_product_category_edit', { id: product_category.id }) }}">editar</a>
               </td>
             </tr>
           {% else %}
             <tr>
-              <td>Sem registros</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td colspan="5">Sem registros</td>
             </tr>
           {% endfor %}
         </tbody>
